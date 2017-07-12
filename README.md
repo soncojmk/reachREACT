@@ -39,6 +39,11 @@ most of the other apps are external apps that I needed to make changes to. They 
 
 
 ```
+How to send Token: 
+        Authorization: Token xxxxxxxxxxxxxx23 --> The 'xxxxxxxxxxxxxx23' is the user's actual token value. the 'Authorization' is the key and the 'Token xxxxxxxxxxxxxx23' is the value.   
+                                              --> Swift Example 
+                                              request.addValue("Token a9edb73eb1ecfa66b87037cbfeada07406749f96", forHTTPHeaderField: "Authorization")
+
 API Endpoints
     Login:
         /api-token-auth/ --> (POST) send username and password
@@ -47,6 +52,10 @@ API Endpoints
        api/wp/auth/register/ --> (POST) send username, password, and email
                              --> returns HTTP 200 if successful.
                              --> You then need to ping the login api to get the new user's token
+                             
+    Posting a new Event/Moment:
+        api/events/ (POST) --> post a new event (need to send token with request)
+                           --> Send other variables (check api/events for variable types. They must match. The integers must be sent as Strings
     
     My Profile Page:
         api/myrecommended --> Recommended people to follow (need to send token with request)
@@ -64,7 +73,6 @@ API Endpoints
         api/account/<user_id>/follow (DELETE) --> Delete a follower or a follow request (need to send token with request)
     
     Event Card:
-        api/events/ (POST) --> post a new event (need to send token with request)
         api/events/<event_id>/save (POST) --> Save an event (need to send token with request)
         api/events/<event_id>/save (DELETE) --> Unsave an event (need to send token with request)
         api/events/<event_id>/people_saving (GET) --> get a list of users saving an event
