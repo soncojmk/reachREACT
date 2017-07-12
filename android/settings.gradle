@@ -1,0 +1,3 @@
+rootProject.name = 'futuremoments'
+
+include ':app'
