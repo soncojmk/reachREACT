@@ -64,6 +64,7 @@ API Endpoints
         api/account/<user_id>/follow (DELETE) --> Delete a follower or a follow request (need to send token with request)
     
     Event Card:
+        api/events/ (POST) --> post a new event (need to send token with request)
         api/events/<event_id>/save (POST) --> Save an event (need to send token with request)
         api/events/<event_id>/save (DELETE) --> Unsave an event (need to send token with request)
         api/events/<event_id>/people_saving (GET) --> get a list of users saving an event
