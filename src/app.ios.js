@@ -17,7 +17,7 @@ const navigatorStyle = {
 class App extends Component {
   constructor(props) {
     super(props);
-    
+
       this.startApp();
   }
 
@@ -33,12 +33,19 @@ Navigation.startTabBasedApp({
       title: 'Screen One'
     },
     {
-      label: 'Two',
+      label: 'Post',
+      screen: 'futuremoments.PostMoment',
+      //icon: require('../img/two.png'),
+      //selectedIcon: require('../img/two_selected.png'), // iOS only
+      title: 'Screen Three'
+    },
+    {
+      label: 'Three',
       screen: 'futuremoments.SampleAppMovies',
       //icon: require('../img/two.png'),
       //selectedIcon: require('../img/two_selected.png'), // iOS only
       title: 'Screen Two'
-    }
+    },
   ]
 });
 
