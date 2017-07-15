@@ -16,6 +16,7 @@
    Picker,
    TextInput,
  } from 'react-native';
+ import moment from '../../node_modules/moment/src/moment.js';
 
 var REQUEST_URL = 'https://www.wpoppin.com/api/events.json';
 var POST_URL = 'https://www.wpoppin.com/api/events/';
@@ -23,24 +24,17 @@ var POST_URL = 'https://www.wpoppin.com/api/events/';
 
 export default class ShareScreen extends Component {
 
-  // var times = {
-  // "In half an hour":"1",
-  // "In an hour": "2",
-  // "Tonight":"3",
-  // "Tomorrow":"4",
-  // "This week":"5",
-  // "Next week":"6",
-  // "Next month":"7",
-  // }
   constructor(props) {
       super(props);
+      this.uploadMoment = this.uploadMoment.bind(this);
+      console.log(this.props.time.format('YYYY-MM-D'))
+      console.log(this.props.time.format('hh:mm:ss'))
     }
 
     uploadMoment(){
       var myHeaders = new Headers();
       myHeaders.append('Authorization', 'Token 77ea22f962b2366f1503277aff9bacdc8199edcd');
       myHeaders.append('Content-type', 'application/json');
-
       var myInit = { method: 'POST',
                headers: myHeaders,
                body: JSON.stringify({
@@ -51,8 +45,8 @@ export default class ShareScreen extends Component {
                  "city": "University Park",
                  "state": "PA",
                  "zip_code": "16802",
-                 "date": "2017-08-10",
-                 "time": "16:00:00",
+                 "date": this.props.time.format('YYYY-MM-D'),
+                 "time": this.props.time.format('hh:mm:ss'),
                  "description": this.props.caption,
                }),
              };

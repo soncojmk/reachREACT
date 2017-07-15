@@ -29,7 +29,7 @@ export default class PostMoment extends Component {
         moment: "",
       };
     }
-    
+
     //
     // componentDidMount() {
     //   //this.fetchData();
@@ -78,12 +78,12 @@ export default class PostMoment extends Component {
                                                          title: 'Moment Details',
                                                          passProps: {moment: itemValue}
                                                        }))}>
-              <Picker.Item label="Club" value="Club" />
-              <Picker.Item label="Bar" value="Bar" />
-              <Picker.Item label="Netflix" value="Netflix" />
-              <Picker.Item label="Movies" value="Movies" />
-              <Picker.Item label="Homework" value="Homework" />
-              <Picker.Item label="Party" value="Party" />
+              <Picker.Item label="Club" value="1" />
+              <Picker.Item label="Bar" value="2" />
+              <Picker.Item label="Netflix" value="3" />
+              <Picker.Item label="Movies" value="4" />
+              <Picker.Item label="Homework" value="5" />
+              <Picker.Item label="Party" value="6" />
           </Picker>
           <Text>{this.state.moment}</Text>
         </View>

@@ -3,7 +3,6 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
  import React, {
    Component,
  } from 'react';
@@ -16,14 +15,17 @@
    Picker,
    TextInput,
  } from 'react-native';
+ import moment from '../../node_modules/moment/src/moment.js';
 
 var REQUEST_URL = 'https://www.wpoppin.com/api/events.json';
 var POST_URL = 'https://www.wpoppin.com/api/events/';
 
 
 export default class MomentDetails extends Component {
+
   constructor(props) {
       super(props);
+      this.goToShareScreen = this.goToShareScreen.bind(this);
       this.state = {
         time: "",
         caption: "",
@@ -46,9 +48,6 @@ export default class MomentDetails extends Component {
               <Picker.Item label="In an hour" value="2" />
               <Picker.Item label="Tonight" value="3" />
               <Picker.Item label="Tomorrow" value="4" />
-              <Picker.Item label="This week" value="5" />
-              <Picker.Item label="Next week" value="6" />
-              <Picker.Item label="Next month" value="7" />
           </Picker>
           <Text>{this.state.time}</Text>
           <Text>{this.state.caption}</Text>
@@ -59,11 +58,20 @@ export default class MomentDetails extends Component {
     }
 
     goToShareScreen(){
+      var times = {
+        "1": moment().add(30,'m'),
+        "2": moment().add(1,'h'),
+        "3": moment({hour: 20}),
+        "4": moment({hour: 12}).add(1,'d'),
+      }
+      // console.log(moment().format('hh:mm:ss'))
+      // console.log(moment().format('YYYY-MM-D'))
+
       this.props.navigator.push({
         screen: 'futuremoments.ShareScreen',
-        title: 'Share with..',
-        passProps: {moment: this.props.moment, caption: this.state.caption,
-                          time: this.state.time}});
+        title: 'Share',
+        passProps: {moment: this.props.moment, time: times[this.state.time], caption: this.state.caption}
+      })
     }
   }
 
