@@ -39,7 +39,6 @@
 		507F931B2C2245F8A17E32BF /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA10E8D44DEA468AA0CD8C06 /* Octicons.ttf */; };
 		573DB6BF774A4830983B3C51 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD10C9D955C14A5C8C2F367C /* MaterialIcons.ttf */; };
 		5B81BFB01F13158F003BFEF5 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B81BFAF1F13155F003BFEF5 /* libReactNativeNavigation.a */; };
-		5BD2DAE91F1C4C360016329A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00E356F11AD99517003FC87E /* Info.plist */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		7BAC8BBD349F40BDB940EAB4 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABDAD758FEE747E5AC587352 /* icomoon.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -765,17 +764,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = GR28FH2L45;
-						ProvisioningStyle = Manual;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
-					};
-					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = GR28FH2L45;
-						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1095,9 +1088,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-<<<<<<< HEAD
-				5BD2DAE91F1C4C360016329A /* Info.plist in Resources */,
-=======
 				F809254C5B4744599CD808AB /* Entypo.ttf in Resources */,
 				FA744ECE1E234089B30860E4 /* EvilIcons.ttf in Resources */,
 				C2A32AA096154B6BAFD2EF2F /* FontAwesome.ttf in Resources */,
@@ -1109,7 +1099,6 @@
 				31B11834855940D39FD484F7 /* SimpleLineIcons.ttf in Resources */,
 				017EDEB346C641D1B89FE7F6 /* Zocial.ttf in Resources */,
 				7BAC8BBD349F40BDB940EAB4 /* icomoon.ttf in Resources */,
->>>>>>> 9c367f137e671cdf541c7a5aacdd687fc5e5fa1f
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,7 +1122,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
@@ -1228,8 +1217,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = GR28FH2L45;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1253,7 +1240,6 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/futuremoments.app/futuremoments";
 			};
 			name = Debug;
@@ -1262,11 +1248,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-<<<<<<< HEAD
-				DEVELOPMENT_TEAM = GR28FH2L45;
-=======
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
@@ -1275,7 +1257,6 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 				);
->>>>>>> 9c367f137e671cdf541c7a5aacdd687fc5e5fa1f
 				INFOPLIST_FILE = futuremomentsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1287,7 +1268,6 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/futuremoments.app/futuremoments";
 			};
 			name = Release;
@@ -1296,14 +1276,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-<<<<<<< HEAD
-				DEVELOPMENT_TEAM = GR28FH2L45;
-				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../node_modules/react-native-navigation/**";
-=======
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
@@ -1313,7 +1287,6 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../node_modules/react-native-navigation/ios";
->>>>>>> 9c367f137e671cdf541c7a5aacdd687fc5e5fa1f
 				INFOPLIST_FILE = futuremoments/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1321,10 +1294,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wpoppin.fm;
 				PRODUCT_NAME = futuremoments;
-				PROVISIONING_PROFILE = "a49733b1-597a-4649-bec2-45352eeb7260";
-				PROVISIONING_PROFILE_SPECIFIER = fmoments;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1333,11 +1303,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-<<<<<<< HEAD
-				DEVELOPMENT_TEAM = GR28FH2L45;
-=======
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
@@ -1347,7 +1313,6 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../node_modules/react-native-navigation/ios/**";
->>>>>>> 9c367f137e671cdf541c7a5aacdd687fc5e5fa1f
 				INFOPLIST_FILE = futuremoments/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1355,10 +1320,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wpoppin.fm;
 				PRODUCT_NAME = futuremoments;
-				PROVISIONING_PROFILE = "a49733b1-597a-4649-bec2-45352eeb7260";
-				PROVISIONING_PROFILE_SPECIFIER = fmoments;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1373,7 +1335,6 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1395,7 +1356,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.futuremoments-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
@@ -1413,7 +1373,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1434,7 +1393,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.futuremoments-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
