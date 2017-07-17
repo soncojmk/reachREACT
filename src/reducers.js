@@ -1,22 +1,29 @@
+import { combineReducers } from 'redux'
+import {
+  LOGIN,
+  LOGOUT
+} from './actions'
+
+
 const defaultState = {
     isLoggedIn: false,
     username: '',
     password: ''
 };
 
-export default function reducer(state = defaultState, action) {
+export default function auth(state = defaultState, action) {
     switch (action.type) {
-        case 'LOGIN':
+        case LOGIN:
             return Object.assign({}, state, {
                 isLoggedIn: true,
                 username: action.username,
-                password: action.password
+                token: action.token
             });
-        case 'LOGOUT':
+        case LOGOUT:
             return Object.assign({}, state, {
                 isLoggedIn: false,
                 username: '',
-                password: ''
+                token: ''
             });
         default:
             return state;

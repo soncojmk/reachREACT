@@ -8,16 +8,35 @@ import React, {
 } from 'react';
 import {
   AppRegistry,
+  AsyncStorage,
   Image,
   ListView,
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
 } from 'react-native';
+
+import { Navigation } from 'react-native-navigation';
+import UnauthorizedPage from './unauthorizedPage';
 
 var REQUEST_URL = 'https://www.wpoppin.com/api/events.json';
 
 export default class SampleAppMovies extends Component {
+
+  static navigatorButtons = {
+   rightButtons: [
+     {
+       title: 'add friends', // for a textual button, provide the button title (label)
+       id: 'add', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
+       testID: 'e2e_rules', // optional, used to locate this view in end-to-end tests
+       buttonColor: 'blue', // Optional, iOS only. Set color for the button (can also be used in setButtons function to set different button style programatically)
+       buttonFontSize: 14, // Set font size for the button (can also be used in setButtons function to set different button style programatically)
+       buttonFontWeight: '600', // Set font weight for the button (can also be used in setButtons function to set different button style programatically)
+     }
+   ]
+ };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,6 +45,15 @@ export default class SampleAppMovies extends Component {
       }),
       loaded: false,
     };
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+  }
+
+  onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
+    if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
+      if (event.id == 'add') { // this is the same id field from the static navigatorButtons definition
+        AlertIOS.alert('NavBar', 'Edit button pressed');
+      }
+    }
   }
 
   componentDidMount() {
@@ -44,16 +72,43 @@ export default class SampleAppMovies extends Component {
       .done();
   }
 
+  async userLogout(){
+
+    try {
+        await AsyncStorage.removeItem('token');
+        await AsyncStorage.removeItem('username');
+        console.log(await AsyncStorage.getItem('token'));
+    } catch (error) {
+      console.log("asyncstorage error " + error);
+    }
+    Navigation.startSingleScreenApp({
+              screen: {
+                screen: 'futuremoments.UnauthorizedPage',
+                //title: 'Login',
+                navigatorStyle: {}
+              }
+            });
+  }
+
   render() {
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
 
     return (
+      <View>
+      <TouchableOpacity activeOpacity={.5}
+        onPress={() => this.userLogout()}>
+      <View>
+        <Text >Logout</Text>
+      </View>
+    </TouchableOpacity>
+
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderMovie}
         style={styles.listView}/>
+      </View>
     );
   }
 
@@ -69,6 +124,7 @@ export default class SampleAppMovies extends Component {
 
   renderMovie(movie) {
     return (
+
       <View style={styles.container}>
         <Image
           //source={{uri: movie.posters.thumbnail}}

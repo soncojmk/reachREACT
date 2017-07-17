@@ -1,14 +1,17 @@
-export const login = (username, password) => {
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
+
+export const login = (username, token) => {
     return {
-        type: 'LOGIN',
+        type: LOGIN,
         username: username,
-        password: password
+        token: token
     };
 };
 
 export const logout = () => {
     return {
-        type: 'LOGOUT'
+        type: LOGOUT
     };
 };
 
