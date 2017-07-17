@@ -40,11 +40,11 @@ Navigation.startTabBasedApp({
       title: 'Screen Three'
     },
     {
-      label: 'Three',
-      screen: 'futuremoments.SampleAppMovies',
+      label: 'Profile',
+      screen: 'futuremoments.Profile',
       //icon: require('../img/two.png'),
       //selectedIcon: require('../img/two_selected.png'), // iOS only
-      title: 'Screen Two'
+      title: 'Screen Three'
     },
   ]
 });

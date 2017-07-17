@@ -27,11 +27,10 @@ export default class ShareScreen extends Component {
   constructor(props) {
       super(props);
       this.uploadMoment = this.uploadMoment.bind(this);
-      console.log(this.props.time.format('YYYY-MM-D'))
-      console.log(this.props.time.format('hh:mm:ss'))
     }
 
     uploadMoment(){
+
       var myHeaders = new Headers();
       myHeaders.append('Authorization', 'Token 77ea22f962b2366f1503277aff9bacdc8199edcd');
       myHeaders.append('Content-type', 'application/json');

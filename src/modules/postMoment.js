@@ -20,6 +20,10 @@
 
 var REQUEST_URL = 'https://www.wpoppin.com/api/events.json';
 var POST_URL = 'https://www.wpoppin.com/api/events/';
+//import Icon from 'react-native-vector-icons/FontAwesome';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import iconMoonSelection from '../selection.json';
+const Icon = createIconSetFromIcoMoon(iconMoonSelection);
 
 
 export default class PostMoment extends Component {
@@ -28,63 +32,58 @@ export default class PostMoment extends Component {
       this.state = {
         moment: "",
       };
+      this.goToMomentDetails = this.goToMomentDetails.bind(this);
     }
 
-    //
-    // componentDidMount() {
-    //   //this.fetchData();
-    // }
-
-    // postData(){
-    //   var myHeaders = new Headers();
-    //   myHeaders.append('Authorization', 'Token 77ea22f962b2366f1503277aff9bacdc8199edcd');
-    //   myHeaders.append('Content-type', 'application/json');
-    //
-    //   var myInit = { method: 'POST',
-    //            headers: myHeaders,
-    //            body: JSON.stringify({
-    //              "author": "PennState_University_Libraries",
-    //              "category": "10",
-    //              "title": "TEST",
-    //              "street_address": "Redifer Commons lobby area",
-    //              "city": "University Park",
-    //              "state": "PA",
-    //              "zip_code": "16802",
-    //              "date": "2017-08-10",
-    //              "time": "16:00:00",
-    //              "description": "TESTING",
-    //            }),
-    //          };
-    //
-    //   fetch(POST_URL,myInit)
-    //     .then((response) => console.log(response.status) )
-    //     .then((responseData) => {
-    //        console.log("SENT INFO");
-    //     })
-    //     .done();
-    // }
-
-
+    // <Picker
+    //     selectedValue={this.state.moment}
+    //     onValueChange={(itemValue, itemIndex) => this.setState({moment: itemValue},
+    //                                              this.props.navigator.push({
+    //                                                screen: 'futuremoments.MomentDetails',
+    //                                                title: 'Moment Details',
+    //                                                passProps: {moment: itemValue}
+    //                                              }))}>
+    //     <Picker.Item label="Club" value="1" />
+    //     <Picker.Item label="Bar" value="2" />
+    //     <Picker.Item label="Netflix" value="3" />
+    //     <Picker.Item label="Movies" value="4" />
+    //     <Picker.Item label="Homework" value="5" />
+    //     <Picker.Item label="Party" value="6" />
+    // </Picker>
+    goToMomentDetails(momentChoosen){
+      this.props.navigator.push({
+        screen: 'futuremoments.MomentDetails',
+        title: 'Moment Details',
+        passProps: {moment: momentChoosen}
+      })
+    }
 
     render() {
       return (
-        <View>
-          <Text>Share a future moment...</Text>
-          <Picker
-              selectedValue={this.state.moment}
-              onValueChange={(itemValue, itemIndex) => this.setState({moment: itemValue},
-                                                       this.props.navigator.push({
-                                                         screen: 'futuremoments.MomentDetails',
-                                                         title: 'Moment Details',
-                                                         passProps: {moment: itemValue}
-                                                       }))}>
-              <Picker.Item label="Club" value="1" />
-              <Picker.Item label="Bar" value="2" />
-              <Picker.Item label="Netflix" value="3" />
-              <Picker.Item label="Movies" value="4" />
-              <Picker.Item label="Homework" value="5" />
-              <Picker.Item label="Party" value="6" />
-          </Picker>
+        <View style={styles.container}>
+          <Text style={styles.callToAction}>SHARE A FUTURE MOMENT...</Text>
+          <View style={styles.iconsContainer}>
+            <View style={styles.topLayer}>
+              <Icon onPress={() =>
+              this.goToMomentDetails("gamepad")} name="gamepad" size={60} color="#151E3F" />
+            </View>
+            <View style={styles.spacedLayer}>
+              <Icon color="#519E8A" onPress={() =>
+              this.goToMomentDetails("drink")
+              } name="drink"  size={60}  color="#426A5A" />
+              <Icon onPress={() =>
+              this.goToMomentDetails("tv")
+              } name="tv" size={60}  color="#06070E" />
+              <Icon  onPress={() =>
+              this.goToMomentDetails("music")
+              } name="music" size={60}  color="#7FB685" />
+            </View>
+            <View style={styles.bottomLayer}>
+              <Icon onPress={() =>
+              this.goToMomentDetails("icecream")
+              } name="icecream" size={60}  color="#EF6F6C" />
+            </View>
+          </View>
           <Text>{this.state.moment}</Text>
         </View>
         // <ListView
@@ -98,28 +97,50 @@ export default class PostMoment extends Component {
   var styles = StyleSheet.create({
     container: {
       flex: 1,
-      flexDirection: 'row',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#F5FCFF',
     },
-    rightContainer: {
+    iconsContainer: {
       flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 10,
+      marginBottom: 50,
+      //backgroundColor: 'blue',
+
     },
-    title: {
-      fontSize: 20,
-      marginBottom: 8,
+    callToAction: {
+      fontSize: 25,
+      marginTop: 50,
       textAlign: 'center',
     },
-    year: {
-      textAlign: 'center',
+    topLayer: {
+      height: 100,
+      width: 200,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      //backgroundColor: 'yellow',
     },
-    thumbnail: {
-      width: 53,
-      height: 81,
+    bottomLayer: {
+      height: 100,
+      width: 200,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+      //backgroundColor: 'yellow',
     },
-    listView: {
-      paddingTop: 20,
-      backgroundColor: '#F5FCFF',
+    icons: {
+      width: 90,
+      height: 80,
+    },
+    spacedLayer: {
+      width:300,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      //backgroundColor: 'green',
     },
   });
