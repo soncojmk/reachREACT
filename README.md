@@ -20,6 +20,9 @@ How to send Token:
                                               request.addValue("Token a9edb73eb1ecfa66b87037cbfeada07406749f96", forHTTPHeaderField: "Authorization")
 
 API Endpoints
+    Updating Profile:
+        /api/account/<user_id>/update_profile/ --> (POST) send about or college(int) or avatar with auth token
+        
     Login:
         /api-token-auth/ --> (POST) send username and password
                          --> Returns user token
