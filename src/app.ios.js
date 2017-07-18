@@ -9,6 +9,12 @@ import { registerScreens } from './screens';
 import logger from "redux-logger"
 import * as reducers from "./reducers";
 
+import PostMoment from './modules/postMoment';
+import MomentDetails from './modules/momentDetails';
+import ShareScreen from './modules/shareScreen';
+import Profile from './modules/profile';
+import EditProfile from './modules/editProfile';
+
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
@@ -90,19 +96,26 @@ startFeed(){
     Navigation.startTabBasedApp({
       tabs: [
         {
-          label: 'One',
-          screen: 'futuremoments.SampleAppMovies', // this is a registered name for a screen
+          label: 'Feed',
+          screen: 'futuremoments.Feed', // this is a registered name for a screen
           //icon: require('../img/one.png'),
           //selectedIcon: require('../img/one_selected.png'), // iOS only
-          title: 'Screen One'
+          title: 'Feed'
         },
         {
-          label: 'Two',
-          screen: 'futuremoments.SampleAppMovies',
-          //icon: require('../img/two.png'),
-          //selectedIcon: require('../img/two_selected.png'), // iOS only
-          title: 'Screen Two'
-        }
+      label: 'Post',
+      screen: 'futuremoments.PostMoment',
+      //icon: require('../img/two.png'),
+      //selectedIcon: require('../img/two_selected.png'), // iOS only
+      title: 'Share a Moment'
+    },
+    {
+      label: 'Profile',
+      screen: 'futuremoments.Profile',
+      //icon: require('../img/two.png'),
+      //selectedIcon: require('../img/two_selected.png'), // iOS only
+      title: 'Profile'
+    },
       ]
     });
 }

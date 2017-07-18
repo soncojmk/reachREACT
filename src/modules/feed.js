@@ -20,9 +20,10 @@ import {
 import { Navigation } from 'react-native-navigation';
 import UnauthorizedPage from './unauthorizedPage';
 
+
 var REQUEST_URL = 'https://www.wpoppin.com/api/events.json';
 
-export default class SampleAppMovies extends Component {
+export default class Feed extends Component {
 
   static navigatorButtons = {
    rightButtons: [
@@ -51,7 +52,7 @@ export default class SampleAppMovies extends Component {
   onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
     if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
       if (event.id == 'add') { // this is the same id field from the static navigatorButtons definition
-        AlertIOS.alert('NavBar', 'Edit button pressed');
+        Alert.alert('NavBar', 'Edit button pressed');
       }
     }
   }

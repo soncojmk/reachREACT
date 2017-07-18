@@ -12,6 +12,7 @@ import * as reducers from "./src/reducers";
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
+import APPS from './src/app';
 
 
 registerScreens(store, Provider);
@@ -94,24 +95,25 @@ Navigation.startSingleScreenApp({
 
 startFeed(){
   console.log("feed");
-    Navigation.startTabBasedApp({
-      tabs: [
-        {
-          label: 'One',
-          screen: 'futuremoments.SampleAppMovies', // this is a registered name for a screen
-          //icon: require('../img/one.png'),
-          //selectedIcon: require('../img/one_selected.png'), // iOS only
-          title: 'Screen One'
-        },
-        {
-          label: 'Two',
-          screen: 'futuremoments.SampleAppMovies',
-          //icon: require('../img/two.png'),
-          //selectedIcon: require('../img/two_selected.png'), // iOS only
-          title: 'Screen Two'
-        }
-      ]
-    });
+  const  app = new APPS();
+    // Navigation.startTabBasedApp({
+    //   tabs: [
+    //     {
+    //       label: 'One',
+    //       screen: 'futuremoments.SampleAppMovies', // this is a registered name for a screen
+    //       //icon: require('../img/one.png'),
+    //       //selectedIcon: require('../img/one_selected.png'), // iOS only
+    //       title: 'Screen One'
+    //     },
+    //     {
+    //       label: 'Two',
+    //       screen: 'futuremoments.SampleAppMovies',
+    //       //icon: require('../img/two.png'),
+    //       //selectedIcon: require('../img/two_selected.png'), // iOS only
+    //       title: 'Screen Two'
+    //     }
+    //   ]
+    // });
 }
 
 
