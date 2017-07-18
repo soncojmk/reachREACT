@@ -6,6 +6,7 @@ import MomentDetails from './modules/momentDetails';
 import ShareScreen from './modules/shareScreen';
 import Profile from './modules/profile';
 import EditProfile from './modules/editProfile';
+import Notifications from './modules/notifications';
 
 
 
@@ -18,5 +19,6 @@ export function registerScreens() {
   Navigation.registerComponent('futuremoments.ShareScreen', () => ShareScreen);
   Navigation.registerComponent('futuremoments.Profile', () => Profile);
   Navigation.registerComponent('futuremoments.EditProfile', () => EditProfile);
+  Navigation.registerComponent('futuremoments.Notifications', () => Notifications);
 
 }
