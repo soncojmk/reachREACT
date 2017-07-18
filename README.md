@@ -67,7 +67,7 @@ API Endpoints
                     -->  Needed in order to allow device specific notifications on events like following, commenting...
                     
    Notification Feed:
-       api/notificationfeed (GET) --> (need to send authorization token with request)
+       api/notificationfeed/ (GET) --> (need to send authorization token with request)
                                   --> outputs the actor, recipient, verb, and action_object of the notification
                                   --> Sort of like "Joe (actor) followed (Verb) Jake (recipient) 
                                   --> or "Jake (Actor) saved (verb) Jake's (recipient) event, the roast of time (action_object)
