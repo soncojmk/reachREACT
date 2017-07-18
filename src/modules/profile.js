@@ -82,7 +82,7 @@ export default class Profile extends Component {
         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center',
                 alignItems: 'center',}}>
                 <View>
-                  {this.state.avatar != "" ? <Image style={{ width: 50, height: 50 }}
+                  {this.state.avatar != null ? <Image style={{ width: 50, height: 50 }}
                   source={{ uri: this.state.avatar }} defaultSource={placeholder}></Image>: <Image style={{ width: 50, height: 50 }}
                   source={placeholder} ></Image>}
                   <Text>Name: {this.state.name}</Text>
