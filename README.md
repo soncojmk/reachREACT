@@ -49,7 +49,13 @@ API Endpoints
         api/account/<user_id>/follow  (POST) --> Follow a user (need to send token with request)
         api/account/<user_id>/follow (PUT) --> Accept a follow request (need to send token with request)
         api/account/<user_id>/follow (DELETE) --> Delete a follower or a follow request (need to send token with request)
-    
+        api/account/<user_id>/follow_status (GET) --> Check whether the requesting user is following the url user(need to send token with request)
+                        --> Get back this object {
+                                                  "following": "false",
+                                                  "requested": "false",
+                                                  "neither": "true"
+                                                }
+        
     Event Card:
         api/events/<event_id>/save (POST) --> Save an event (need to send token with request)
         api/events/<event_id>/save (DELETE) --> Unsave an event (need to send token with request)
