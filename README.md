@@ -20,6 +20,9 @@ How to send Token:
                                               request.addValue("Token a9edb73eb1ecfa66b87037cbfeada07406749f96", forHTTPHeaderField: "Authorization")
 
 API Endpoints
+    Updating Profile:
+        /api/account/<user_id>/update_profile/ --> (POST) send about or college(int) or avatar with auth token
+        
     Login:
         /api-token-auth/ --> (POST) send username and password
                          --> Returns user token
@@ -46,7 +49,13 @@ API Endpoints
         api/account/<user_id>/follow  (POST) --> Follow a user (need to send token with request)
         api/account/<user_id>/follow (PUT) --> Accept a follow request (need to send token with request)
         api/account/<user_id>/follow (DELETE) --> Delete a follower or a follow request (need to send token with request)
-    
+        api/account/<user_id>/follow_status (GET) --> Check whether the requesting user is following the url user(need to send token with request)
+                        --> Get back this object {
+                                                  "following": "false",
+                                                  "requested": "false",
+                                                  "neither": "true"
+                                                }
+        
     Event Card:
         api/events/<event_id>/save (POST) --> Save an event (need to send token with request)
         api/events/<event_id>/save (DELETE) --> Unsave an event (need to send token with request)
@@ -64,7 +73,7 @@ API Endpoints
                     -->  Needed in order to allow device specific notifications on events like following, commenting...
                     
    Notification Feed:
-       api/notificationfeed (GET) --> (need to send authorization token with request)
+       api/notificationfeed/ (GET) --> (need to send authorization token with request)
                                   --> outputs the actor, recipient, verb, and action_object of the notification
                                   --> Sort of like "Joe (actor) followed (Verb) Jake (recipient) 
                                   --> or "Jake (Actor) saved (verb) Jake's (recipient) event, the roast of time (action_object)
