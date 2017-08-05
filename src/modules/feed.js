@@ -52,7 +52,11 @@ export default class Feed extends Component {
   onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
     if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
       if (event.id == 'add') { // this is the same id field from the static navigatorButtons definition
-        Alert.alert('NavBar', 'Edit button pressed');
+        this.props.navigator.push({
+                    screen: 'futuremoments.FindUser',
+                    //title: 'FindUser',
+                    navigatorStyle: {}
+                });
       }
     }
   }

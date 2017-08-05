@@ -9,7 +9,7 @@ import MomentDetails from './modules/momentDetails';
 import ShareScreen from './modules/shareScreen';
 import Profile from './modules/profile';
 import EditProfile from './modules/editProfile';
-
+import FindUser from './modules/FindUser';
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
@@ -22,5 +22,6 @@ export function registerScreens() {
   Navigation.registerComponent('futuremoments.ShareScreen', () => ShareScreen);
   Navigation.registerComponent('futuremoments.Profile', () => Profile);
   Navigation.registerComponent('futuremoments.EditProfile', () => EditProfile);
+  Navigation.registerComponent('futuremoments.FindUser', () => FindUser);
 
 }
