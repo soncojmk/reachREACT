@@ -103,19 +103,33 @@ startFeed(){
           title: 'Feed'
         },
         {
-      label: 'Post',
-      screen: 'futuremoments.PostMoment',
-      //icon: require('../img/two.png'),
-      //selectedIcon: require('../img/two_selected.png'), // iOS only
-      title: 'Share a Moment'
-    },
-    {
-      label: 'Profile',
-      screen: 'futuremoments.Profile',
-      //icon: require('../img/two.png'),
-      //selectedIcon: require('../img/two_selected.png'), // iOS only
-      title: 'Profile'
-    },
+          label: 'Explore',
+          screen: 'futuremoments.FindUser', // this is a registered name for a screen
+          //icon: require('../img/one.png'),
+          //selectedIcon: require('../img/one_selected.png'), // iOS only
+          title: 'Explore'
+        },
+        {
+          label: 'Post',
+          screen: 'futuremoments.PostMoment',
+          //icon: require('../img/two.png'),
+          //selectedIcon: require('../img/two_selected.png'), // iOS only
+          title: 'Share a Moment'
+        },
+        {
+          label: 'Notifications',
+          screen: 'futuremoments.FindUser', // this is a registered name for a screen
+          //icon: require('../img/one.png'),
+          //selectedIcon: require('../img/one_selected.png'), // iOS only
+          title: 'Notifications'
+        },
+        {
+          label: 'Profile',
+          screen: 'futuremoments.Profile',
+          //icon: require('../img/two.png'),
+          //selectedIcon: require('../img/two_selected.png'), // iOS only
+          title: 'Profile'
+        },
       ]
     });
 }

@@ -21,7 +21,7 @@ import { Navigation } from 'react-native-navigation';
 import UnauthorizedPage from './unauthorizedPage';
 
 
-var REQUEST_URL = 'https://www.wpoppin.com/api/events.json';
+var REQUEST_URL = 'https://www.wpoppin.com/api/filteredevents.json';
 
 export default class Feed extends Component {
 
