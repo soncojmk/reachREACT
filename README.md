@@ -34,6 +34,9 @@ API Endpoints
     Posting a new Event/Moment:
         api/events/ (POST) --> post a new event (need to send token with request)
                            --> Send other variables (check api/events for variable types. They must match. The integers must be sent as Strings
+        api/events/<event_id>/save/ (POST) --> save an event for requesting user (need to send token with request)
+        api/events/<event_id>/people_saving (GET) --> returns a list of users who have saved a particular event
+     
     
     My Profile Page:
         api/myrecommended --> Recommended people to follow (need to send token with request)
