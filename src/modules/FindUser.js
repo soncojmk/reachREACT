@@ -23,7 +23,7 @@ import UnauthorizedPage from './unauthorizedPage';
 import SearchBar from 'react-native-search-bar';
 
 
-var REQUEST_URL = 'https://www.wpoppin.com/api/accounts?search=';
+var REQUEST_URL = 'https://www.wpoppin.com/api/accounts/?search=';
 
 export default class FindUser extends Component {
 
@@ -37,6 +37,7 @@ export default class FindUser extends Component {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
+      reloading: false,
       loaded: false,
       searchTerm: "",
       follow_status:"",
@@ -48,72 +49,104 @@ export default class FindUser extends Component {
   // }
 
 fetchData() {
-    fetch(REQUEST_URL + this.state.searchTerm)
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData),
-          loaded: true,
-          follow_status: "",
-        });
-      })
-      .done();
+  var myHeaders = new Headers();
+  myHeaders.append('Authorization', 'Token a9edb73eb1ecfa66b87037cbfeada07406749f96');
+  var myInit = { method: 'GET',
+           headers: myHeaders,
+         };
+
+    url = REQUEST_URL + this.state.searchTerm
+    console.log("finduser " + url)
+    fetch(url, myInit)
+    .then((response) => response.json())
+    .then((responseData) => {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(responseData),
+        loaded: true,
+        reloading:false,
+      });
+    })
+    .done();
+    console.log('finduser ' + this.state.dataSource)
   }
 
 
-  isFollowing(user_url) {
-      var follow_statuses = "";
+  // isFollowing(user_url) {
+  //     var follow_statuses = "";
+  //     var myHeaders = new Headers();
+  //     myHeaders.append('Authorization', 'Token 30d7ec16a933d5f934745add649b8c1e1d4000c2');
+  //     var myInit = { method: 'GET',
+  //              headers: myHeaders,
+  //            };
+  //   console.log("user_url" + user_url );
+  //   fetch(user_url + 'follow_status/', myInit)
+  //       .then((response) => response.json())
+  //       .then((responseData) => {
+  //           //var value = JSON.stringify(responseData);
+  //         console.log("response" + JSON.stringify(responseData));
+  //         console.log("following " + JSON.stringify(responseData.following));
+  //         console.log("requested " + JSON.stringify(responseData.requested));
+  //         console.log("neither " + JSON.stringify(responseData.neither));
+  //
+  //
+  //
+  //           if (responseData.following === "true"){
+  //             follow_statuses = "following";
+  //             console.log("follow_status following user" + follow_statuses);
+  //           }else if (responseData.requested === 'true'){
+  //             follow_statuses = "requested";
+  //             //console.log("follow_status" + follow_status);
+  //           }else if (responseData.neither === 'true'){
+  //             follow_statuses = "false";
+  //             //console.log("follow_status" + follow_status);
+  //           }
+  //           console.log('follow_status ' + follow_statuses );
+  //
+  //           this.setState({
+  //             follow_status: follow_statuses,
+  //           });
+  //       })
+  //       .done();
+  //   }
+
+    followUser(user) {
+      console.log('followuser ' + user.url)
+
       var myHeaders = new Headers();
-      myHeaders.append('Authorization', 'Token 74952f08f14ad80af8f8f0cb24a9aed4490ab69c');
-      var myInit = { method: 'GET',
+      myHeaders.append('Authorization', 'Token a9edb73eb1ecfa66b87037cbfeada07406749f96');
+
+      current_method = ''
+      if(user.follow_status == 'follow'){
+        current_method = 'POST'
+        console.log('followuser POST' + user.follow_status)
+      }else if (user.follow_status == 'requested'){
+        current_method = 'DELETE'
+          console.log('followuser DELETE' + user.follow_status)
+      }else if (user.follow_status == 'following'){
+        current_method = 'DELETE'
+          console.log('followuser DELETE' + user.follow_status)
+      }else {
+        current_method = 'DELETE'
+          console.log('followuser DELETE' + user.follow_status)
+      }
+
+      var myInit = {
+               method: current_method,
                headers: myHeaders,
              };
-    console.log("user_url" + user_url );
-    fetch(user_url + 'follow_status/', myInit)
+      url = user.url + 'follow/'
+        console.log('followuser ' + url)
+      fetch(url, myInit)
         .then((response) => response.json())
         .then((responseData) => {
-            //var value = JSON.stringify(responseData);
-          console.log("response" + JSON.stringify(responseData));
-          console.log("following " + JSON.stringify(responseData.following));
-          console.log("requested " + JSON.stringify(responseData.requested));
-          console.log("neither " + JSON.stringify(responseData.neither));
-
-
-
-            if (responseData.following === "true"){
-              follow_statuses = "following";
-              console.log("follow_status following user" + follow_statuses);
-            }else if (responseData.requested === 'true'){
-              follow_statuses = "requested";
-              //console.log("follow_status" + follow_status);
-            }else if (JesponseData.neither === 'true'){
-              follow_statuses = "false";
-              //console.log("follow_status" + follow_status);
-            }
-            console.log('follow_status ' + follow_statuses );
-
-            this.setState({
-              follow_status: follow_statuses,
-            });
+          console.log('saveevent ' + responseData)
+          this.setState({
+            reloading: true,
+          });
+          this.fetchData();
         })
         .done();
     }
-
-follow(user_url, httpMethod) {
-        console.log("httpMethod" + httpMethod);
-        var follow_status = "";
-        var myHeaders = new Headers();
-        myHeaders.append('Authorization', 'Token 74952f08f14ad80af8f8f0cb24a9aed4490ab69c');
-        var myInit = { method: httpMethod,
-                 headers: myHeaders,
-               };
-      fetch(user_url + 'follow/', myInit)
-          .then((response) => response.json())
-          .then((responseData) => {
-              //this.parseResponse(responseData)
-          })
-          .done();
-      }
 
 
 
@@ -182,41 +215,37 @@ onPressBack(){
 
   renderMovie = (movie) => {
 
-     this.isFollowing(movie.url);
+    if(this.state.reloading == true){
+      return (
+        <View>
+        <Text>loading ...</Text>
+        </View>
+      );
+    }
 
-     console.log('follow_statusess ' + this.state.follow_status);
+     //this.isFollowing(movie.url);
+
+     //console.log('follow_statusess ' + this.state.follow_status);
           //return follow_statuses
 
 
 
 
-    var follow_statuses = this.state.follow_status;
-
-    console.log("follow" + this.state.follow_status);
-    var buttonText = "";
-    var httpMethod = '';
-    if (follow_statuses === "requested"){
-        buttonText = "Requested";
-        httpMethod = 'DELETE';
-    }else if (follow_statuses === "following"){
-        buttonText = "Following";
-        httpMethod = 'DELETE';
-    }else if (follow_statuses === "false"){
-      buttonText = "Follow";
-      httpMethod = 'POST';
-    }
+    //var follow_statuses = this.state.follow_status;
 
     return (
-      <TouchableOpacity  onPress = {() => this.follow.bind(movie.url)} >
-      <Text style={styles.title}>{buttonText}</Text>
-
+      <View>
+      <TouchableOpacity  onPress = {() => this.followUser(movie)} >
+      <Text style={styles.title}>{movie.follow_status}</Text>
+          </TouchableOpacity>
       <View style={styles.container}>
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{movie.url}</Text>
           <Text style={styles.year}>{movie.user.username}</Text>
         </View>
       </View>
-      </TouchableOpacity>
+      </View>
+
     );
   }
 }

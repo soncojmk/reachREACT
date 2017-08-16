@@ -18,7 +18,7 @@
  } from 'react-native';
  import moment from '../../node_modules/moment/src/moment.js';
 
-var REQUEST_URL = 'https://www.wpoppin.com/api/myaccount/';
+var REQUEST_URL = 'https://www.wpoppin.com/api/accounts/922.json/';
 //var DUMMY_01 = 'https://www.wpoppin.com/api/accounts/922/';
 
 
@@ -40,8 +40,8 @@ export default class Profile extends Component {
     }
 
     parseResponse(userArray){
-      var userInfo = userArray[0];
-      console.log(userInfo["avatar"])
+      var userInfo = userArray;
+      console.log('userinfo' + userInfo)
       this.setState({
         name: userInfo["user"]["username"],
         college: userInfo["college"],

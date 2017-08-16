@@ -96,38 +96,38 @@ startFeed(){
     Navigation.startTabBasedApp({
       tabs: [
         {
-          label: 'Feed',
+          //label: 'Feed',
           screen: 'futuremoments.Feed', // this is a registered name for a screen
-          //icon: require('../img/one.png'),
-          //selectedIcon: require('../img/one_selected.png'), // iOS only
+          icon: require('./images/home.png'),
+          selectedIcon: require('./images/home_filled.png'), // iOS only
           title: 'Feed'
         },
         {
-          label: 'Explore',
+          //label: 'Explore',
           screen: 'futuremoments.FindUser', // this is a registered name for a screen
-          //icon: require('../img/one.png'),
-          //selectedIcon: require('../img/one_selected.png'), // iOS only
+          icon: require('./images/search.png'),
+          selectedIcon: require('./images/search_filled.png'), // iOS only
           title: 'Explore'
         },
         {
-          label: 'Post',
+          //label: 'Post',
           screen: 'futuremoments.PostMoment',
-          //icon: require('../img/two.png'),
-          //selectedIcon: require('../img/two_selected.png'), // iOS only
+          icon: require('./images/add.png'),
+          selectedIcon: require('./images/add_filled.png'), // iOS only
           title: 'Share a Moment'
         },
         {
-          label: 'Notifications',
-          screen: 'futuremoments.FindUser', // this is a registered name for a screen
-          //icon: require('../img/one.png'),
-          //selectedIcon: require('../img/one_selected.png'), // iOS only
+          //label: 'Notifications',
+          screen: 'futuremoments.Notification', // this is a registered name for a screen
+          icon: require('./images/notification.png'),
+          selectedIcon: require('./images/notification_filled.png'), // iOS only
           title: 'Notifications'
         },
         {
-          label: 'Profile',
+          //label: 'Profile',
           screen: 'futuremoments.Profile',
-          //icon: require('../img/two.png'),
-          //selectedIcon: require('../img/two_selected.png'), // iOS only
+          icon: require('./images/user.png'),
+          selectedIcon: require('./images/user_filled.png'), // iOS only
           title: 'Profile'
         },
       ]

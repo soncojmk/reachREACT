@@ -10,7 +10,9 @@ import ShareScreen from './modules/shareScreen';
 import Profile from './modules/profile';
 import EditProfile from './modules/editProfile';
 import FindUser from './modules/FindUser';
-
+import Notification from './modules/notification';
+import EventDetailsView from './modules/eventDetailsView';
+import UserDetailsView from './modules/userDetailsView';
 // register all screens of the app (including internal ones)
 export function registerScreens() {
   Navigation.registerComponent('futuremoments.Feed', () => Feed);
@@ -23,5 +25,7 @@ export function registerScreens() {
   Navigation.registerComponent('futuremoments.Profile', () => Profile);
   Navigation.registerComponent('futuremoments.EditProfile', () => EditProfile);
   Navigation.registerComponent('futuremoments.FindUser', () => FindUser);
-
+  Navigation.registerComponent('futuremoments.Notification', () => Notification);
+  Navigation.registerComponent('futuremoments.EventDetailsView', () => EventDetailsView);
+  Navigation.registerComponent('futuremoments.UserDetailsView', () => UserDetailsView);
 }
