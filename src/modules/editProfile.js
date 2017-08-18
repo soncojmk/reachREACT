@@ -33,15 +33,15 @@ export default class EditProfile extends Component {
         name: this.props.name,
         about: this.props.about,
         college: this.props.college,
-        url: this.props.url+"/update_profile/",
-        avatar: "",
+        url: this.props.url.replace(".json", "/update_profile/"),
+        avatar: this.props.avatar,
       }
       this.updateUserData = this.updateUserData.bind(this);
     }
 
     updateUserData() {
         var myHeaders = new Headers();
-        myHeaders.append('Authorization', 'Token 30d7ec16a933d5f934745add649b8c1e1d4000c2');
+        myHeaders.append('Authorization', 'Token 74952f08f14ad80af8f8f0cb24a9aed4490ab69c');
         myHeaders.append('Content-type', 'application/json');
 
         var myInit = { method: 'POST',
@@ -52,8 +52,10 @@ export default class EditProfile extends Component {
                    avatar: this.state.avatar,
                  }),
                };
-        fetch(this.state.url,myInit)
-          .then((response) => console.log(response.status))
+
+        console.log("editprofile url" + this.state.url)
+        fetch(this.state.url ,myInit)
+          .then((response) => console.log("editprofile " + response.status + " editprofile + avatar " + this.state.avatar))
           .then((responseData) => {
           })
           .done();
@@ -67,35 +69,39 @@ export default class EditProfile extends Component {
             placeholder={this.props.about}
             onChangeText={(text) => this.setState({about: text})}
           />
+
           <TextInput
             style={{height: 40}}
             placeholder={this.props.college}
             onChangeText={(text) => this.setState({college: text})}
           />
+
+
+
           <Text>Upload Picture</Text>
+
           <PhotoUpload
-               onPhotoSelect={profilePicture => {
-                 if (profilePicture) {
-                   console.log('Image base64 string: ', profilePicture)
-                   this.setState({
-                     avatar: profilePicture
-                   })
-                 }
+             onPhotoSelect={avatar => {
+               if (avatar) {
+                 console.log('editprofile Image base64 string: ', avatar)
+                 this.setState({ avatar: avatar });
+               }
+             }}
+           >
+             <Image
+               style={{
+                 paddingVertical: 30,
+                 width: 150,
+                 height: 150,
+                 borderRadius: 75
                }}
-             >
-               <Image
-                 style={{
-                   paddingVertical: 30,
-                   width: 150,
-                   height: 150,
-                   borderRadius: 75
-                 }}
-                 resizeMode='cover'
-                 source={{
-                   uri: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
-                 }}
-               />
-          </PhotoUpload>
+               resizeMode='cover'
+               source={{
+                 uri: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
+               }}
+             />
+           </PhotoUpload>
+
           <Button onPress={this.updateUserData} title="Save"></Button>
         </View>
       );

@@ -111,10 +111,10 @@ startFeed(){
         },
         {
           //label: 'Post',
-          screen: 'futuremoments.PostMoment',
+          screen: 'futuremoments.PostNew',
           icon: require('./images/add.png'),
           selectedIcon: require('./images/add_filled.png'), // iOS only
-          title: 'Share a Moment'
+          title: 'Share'
         },
         {
           //label: 'Notifications',

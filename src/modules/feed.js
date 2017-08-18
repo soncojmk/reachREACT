@@ -139,7 +139,7 @@ export default class Feed extends Component {
   onObjectPress(object_url, object_title){
     this.props.navigator.push({
         screen: 'futuremoments.EventDetailsView', // unique ID registered with Navigation.registerScreen
-        title: object_title, // title of the screen as appears in the nav bar (optional)
+        title: "Event Details", // title of the screen as appears in the nav bar (optional)
         navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
         navigatorButtons: {}, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
         // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
@@ -220,7 +220,7 @@ getPeopleSaving(user_url, event_url){
         <Image
             source={{uri: event.image}}
           style={styles.thumbnail}/> : <Image
-            
+
             style={styles.thumbnail}/> }
 
         <View style={styles.horizontalContainer}>

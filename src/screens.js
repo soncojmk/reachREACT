@@ -13,6 +13,10 @@ import FindUser from './modules/FindUser';
 import Notification from './modules/notification';
 import EventDetailsView from './modules/eventDetailsView';
 import UserDetailsView from './modules/userDetailsView';
+import PostNew from './modules/postNew';
+import AddEventDetailsPage from './modules/addEventDetailsPage';
+import AddEventDetailsPage2 from './modules/addEventDetailsPage2';
+
 // register all screens of the app (including internal ones)
 export function registerScreens() {
   Navigation.registerComponent('futuremoments.Feed', () => Feed);
@@ -28,4 +32,7 @@ export function registerScreens() {
   Navigation.registerComponent('futuremoments.Notification', () => Notification);
   Navigation.registerComponent('futuremoments.EventDetailsView', () => EventDetailsView);
   Navigation.registerComponent('futuremoments.UserDetailsView', () => UserDetailsView);
+  Navigation.registerComponent('futuremoments.PostNew', () => PostNew);
+  Navigation.registerComponent('futuremoments.AddEventDetailsPage', () => AddEventDetailsPage);
+  Navigation.registerComponent('futuremoments.AddEventDetailsPage2', () => AddEventDetailsPage2);
 }

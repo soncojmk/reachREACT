@@ -20,7 +20,7 @@ import {
 import { Navigation } from 'react-native-navigation';
 import UnauthorizedPage from './unauthorizedPage';
 
-
+const placeholder = require('../images/placeholder.jpg');
 var REQUEST_URL = 'https://www.wpoppin.com/api/notificationfeed.json';
 
 export default class Notification extends Component {
@@ -94,13 +94,14 @@ export default class Notification extends Component {
   }
 
   onUserPress (object_url, object_title) {
+    url = object_url.replace(".json", "/")
     this.props.navigator.push({
         screen: 'futuremoments.UserDetailsView', // unique ID registered with Navigation.registerScreen
         title: object_title, // title of the screen as appears in the nav bar (optional)
         navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
         navigatorButtons: {}, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
         // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
-      passProps: {url: object_url}, // simple serializable object that will pass as props to all top screens (optional)
+      passProps: {url: url}, // simple serializable object that will pass as props to all top screens (optional)
       animationType: 'slide-down'
     });
   }
@@ -146,6 +147,19 @@ export default class Notification extends Component {
   }
 
 
+  onEventPress(object_url, object_title){
+    this.props.navigator.push({
+        screen: 'futuremoments.EventDetailsView', // unique ID registered with Navigation.registerScreen
+        title: "Event Details", // title of the screen as appears in the nav bar (optional)
+        navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+        navigatorButtons: {}, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
+        // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
+      passProps: {url: object_url}, // simple serializable object that will pass as props to all top screens (optional)
+      animationType: 'slide-down'
+    });
+}
+
+
 
   render() {
     if (!this.state.loaded) {
@@ -178,13 +192,28 @@ export default class Notification extends Component {
     return (
 
       <View style={styles.container}>
-        <Image
-          //source={{uri: movie.posters.thumbnail}}
-          style={styles.thumbnail}/>
-        <View style={styles.rightContainer}>
-            <Text style={styles.title}> <Text style={styles.thumbnail}  onPress = {() => this.onUserPress(movie.actor_account.url, movie.actor)}> {movie.actor}</Text> {movie.verb}
-            {movie.action_object_event ? <Text style={styles.thumbnail}  onPress = {() => this.onEventPress(movie.action_object_event.url, movie.action_object_event.title)}>
-            <Text> {movie.action_object_event.title}</Text></Text>:<Text onPress = {() => this.followUser(movie.recipient_account)}>Accept Request</Text>}</Text>
+
+        <View style={styles.textWrap}>
+
+        <View style={styles.horizontalContainer}>
+          <TouchableOpacity style={{flex:0.1}} onPress = {() => this.onUserPress(movie.actor_account.url, movie.actor)}>
+              {movie.actor_account.avatar ?
+              <Image
+                  source={{uri: movie.actor_account.avatar}}
+                style={styles.avatar}/> :
+                <Image
+                    source={placeholder}
+                  style={styles.avatar}/> }
+                  </TouchableOpacity>
+
+      <View style={styles.padding}>
+          <Text style={styles.year}> <Text  style={styles.link} onPress = {() => this.onUserPress(movie.actor_account.url, movie.actor)}> {movie.actor}</Text> {movie.verb}
+          {movie.action_object_event ? <Text  style={styles.link} onPress = {() => this.onEventPress(movie.action_object_event.url, movie.action_object_event.title)}>
+          <Text> {movie.action_object_event.title}</Text></Text>:<Text onPress = {() => this.followUser(movie.recipient_account)}> Accept Request</Text>}</Text>
+      </View>
+
+      </View>
+
 
         </View>
       </View>
@@ -193,16 +222,39 @@ export default class Notification extends Component {
 }
 
 var styles = StyleSheet.create({
+
   container: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
+    marginBottom: 10,
+  },
+  padding:{
+    flex: .6,
+    flexDirection: 'column',
+    textAlign: 'left',
+    alignItems: 'flex-start',
   },
   rightContainer: {
     flex: 1,
   },
+  horizontalContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    marginLeft: 10,
+
+  },
+  textWrap: {
+    flexDirection: 'column',
+    flex: 0.8,
+    flexWrap: 'wrap'
+  },
+
+  link:{
+    color: 'blue',
+  },
+
   title: {
     fontSize: 20,
     marginBottom: 8,
@@ -210,13 +262,24 @@ var styles = StyleSheet.create({
   },
   year: {
     textAlign: 'center',
+    marginTop: 10,
+    marginLeft: 7,
   },
   thumbnail: {
-    width: 5,
-    height: 81,
+    width: 600,
+    height: 200,
   },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    alignItems: 'center',
+
+  },
+
   listView: {
     paddingTop: 20,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
+    marginBottom: 70,
   },
 });

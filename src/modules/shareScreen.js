@@ -29,31 +29,35 @@ export default class ShareScreen extends Component {
       this.uploadMoment = this.uploadMoment.bind(this);
     }
 
+
+
     uploadMoment(){
 
       var myHeaders = new Headers();
       myHeaders.append('Authorization', 'Token 77ea22f962b2366f1503277aff9bacdc8199edcd');
       myHeaders.append('Content-type', 'application/json');
-      var myInit = { method: 'POST',
+      var myInit = {
+               method: 'POST',
                headers: myHeaders,
                body: JSON.stringify({
-                 "author": "Test user 01",
-                 "category": this.props.moment,
-                 "title": "TEST",
-                 "street_address": "Redifer Commons lobby area",
-                 "city": "University Park",
-                 "state": "PA",
-                 "zip_code": "16802",
-                 "date": this.props.time.format('YYYY-MM-D'),
-                 "time": this.props.time.format('hh:mm:ss'),
-                 "description": this.props.caption,
+                 category: "15",
+                 title: this.props.caption,
+                 //time: this.state.time,
+                 //date: thi.state.date,
+                 is_personal: true,
+                //  price: this.state.price,
+                 street_address: "personal",
+                 city: "personal",
+                 state: "PA",
+                 zip_code: "pers",
+                 description: "personal",
                }),
              };
 
       fetch(POST_URL,myInit)
         .then((response) => console.log(response.status) )
         .then((responseData) => {
-           console.log("SENT INFO");
+           console.log("SENT ");
         })
         .done();
     }
@@ -61,7 +65,7 @@ export default class ShareScreen extends Component {
     render() {
       return (
         <View>
-          <Button onPress={this.uploadMoment} title="Send!"></Button>
+          <Button onPress={this.uploadMoment()} title="Send!"></Button>
         </View>
       );
     }

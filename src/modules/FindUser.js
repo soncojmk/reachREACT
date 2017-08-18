@@ -22,7 +22,7 @@ import UnauthorizedPage from './unauthorizedPage';
 
 import SearchBar from 'react-native-search-bar';
 
-
+const placeholder = require('../images/placeholder.jpg');
 var REQUEST_URL = 'https://www.wpoppin.com/api/accounts/?search=';
 
 export default class FindUser extends Component {
@@ -149,6 +149,23 @@ fetchData() {
     }
 
 
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    onUserPress (object_url, object_title) {
+      url = object_url.replace(".json", "/")
+      this.props.navigator.push({
+          screen: 'futuremoments.UserDetailsView', // unique ID registered with Navigation.registerScreen
+          title: object_title, // title of the screen as appears in the nav bar (optional)
+          navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+          navigatorButtons: {}, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
+          // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
+        passProps: {url: url}, // simple serializable object that will pass as props to all top screens (optional)
+        animationType: 'slide-down'
+      });
+    }
+
 
 onPressBack(){
     this.props.navigator.pop();
@@ -213,7 +230,7 @@ onPressBack(){
     );
   }
 
-  renderMovie = (movie) => {
+  renderMovie = (user) => {
 
     if(this.state.reloading == true){
       return (
@@ -222,44 +239,52 @@ onPressBack(){
         </View>
       );
     }
+    username = this.capitalizeFirstLetter(user.user.username);
 
-     //this.isFollowing(movie.url);
-
-     //console.log('follow_statusess ' + this.state.follow_status);
-          //return follow_statuses
-
-
-
-
-    //var follow_statuses = this.state.follow_status;
 
     return (
-      <View>
-      <TouchableOpacity  onPress = {() => this.followUser(movie)} >
-      <Text style={styles.title}>{movie.follow_status}</Text>
-          </TouchableOpacity>
+
       <View style={styles.container}>
-        <View style={styles.rightContainer}>
-          <Text style={styles.title}>{movie.url}</Text>
-          <Text style={styles.year}>{movie.user.username}</Text>
-        </View>
-      </View>
+        <View style={styles.horizontalContainer}>
+      <TouchableOpacity onPress={() => this.onUserPress(user.url, user.user.username)}>
+              {user.avatar ?
+              <Image
+                  source={{uri: user.avatar}}
+                style={styles.avatar}/> :
+                <Image
+                    source={placeholder}
+                  style={styles.avatar}/> }
+
+
+
+
+      </TouchableOpacity>
+        <Text onPress={() => this.onUserPress(user.url, user.user.username)} style={styles.year}>{username}</Text>
       </View>
 
+      </View>
     );
   }
 }
 
 var styles = StyleSheet.create({
+
   container: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    marginBottom: 10,
   },
   rightContainer: {
     flex: 1,
+  },
+  horizontalContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    marginLeft: 50,
+
   },
   title: {
     fontSize: 20,
@@ -268,13 +293,24 @@ var styles = StyleSheet.create({
   },
   year: {
     textAlign: 'center',
+    marginTop: 10,
+    marginLeft: 15,
   },
   thumbnail: {
-    width: 53,
-    height: 81,
+    width: 600,
+    height: 200,
   },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    alignItems: 'center',
+
+  },
+
   listView: {
     paddingTop: 20,
     backgroundColor: '#F5FCFF',
+    marginBottom: 70,
   },
 });
