@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Button,
   TouchableOpacity,
 } from 'react-native';
 
@@ -17,6 +18,7 @@ import { Navigation } from 'react-native-navigation';
 import UnauthorizedPage from './unauthorizedPage';
 
 var REQUEST_URL = 'https://www.wpoppin.com/api/events/386/';
+const placeholder = require('../images/placeholder.jpg');
 
 export default class UserDetailsView extends Component {
 
@@ -53,6 +55,44 @@ export default class UserDetailsView extends Component {
   }
 
 
+  followUser(user) {
+    console.log('followuser ' + user.url)
+
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Token a9edb73eb1ecfa66b87037cbfeada07406749f96');
+
+    current_method = ''
+    if(user.follow_status == 'follow'){
+      current_method = 'POST'
+      console.log('followuser POST' + user.follow_status)
+    }else if (user.follow_status == 'requested'){
+      current_method = 'DELETE'
+        console.log('followuser DELETE' + user.follow_status)
+    }else if (user.follow_status == 'following'){
+      current_method = 'DELETE'
+        console.log('followuser DELETE' + user.follow_status)
+    }else {
+      current_method = 'DELETE'
+        console.log('followuser DELETE' + user.follow_status)
+    }
+
+    var myInit = {
+             method: current_method,
+             headers: myHeaders,
+           };
+    url = user.url + 'follow/'
+      console.log('followuser ' + url)
+    fetch(url, myInit)
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log('saveevent ' + responseData)
+        this.setState({
+          reloading: true,
+        });
+        this.fetchData();
+      })
+      .done();
+  }
 
 
   parseResponse(userObject){
@@ -86,29 +126,46 @@ export default class UserDetailsView extends Component {
       .done();
   }
 
+  capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 
 
   render() {
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
-
+    username = this.capitalizeFirstLetter(this.state.username)
+    follow_status = this.capitalizeFirstLetter(this.state.follow_status).toString()
     return (
 
       <View style={styles.container}>
+      <View style={styles.padding}>
+      <View style={styles.horizontalContainer}>
+    <TouchableOpacity>
+            {this.state.avatar ?
+            <Image
+                source={{uri: this.state.avatar}}
+              style={styles.avatar}/> :
+              <Image
+                  source={placeholder}
+                style={styles.avatar}/> }
 
-        <Image
-          //source={{uri: movie.posters.thumbnail}}
-          style={styles.thumbnail}/>
-          <View>
 
-              <View style={styles.rightContainer}>
-                <Text style={styles.title}>{this.state.username}</Text>
-                <Text style={styles.year}>{this.state.about}</Text>
-                </View>
+    </TouchableOpacity>
+    <View style={styles.padding}>
+      < View>
+      <Text style={styles.title}>{username}</Text>
 
-          </View>
+          <Text style={styles.year}>{this.state.num_followers} followers    {this.state.num_following} following </Text>
+            <View style={styles.separator} />
 
+            <Button title={follow_status} style={styles.year}></Button>
+      </View>
+      </View>
+      </View>
+      </View>
       </View>
     );
   }
@@ -146,30 +203,69 @@ export default class UserDetailsView extends Component {
   }
 
   var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  rightContainer: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  year: {
-    textAlign: 'center',
-  },
-  thumbnail: {
-    width: 53,
-    height: 81,
-  },
-  listView: {
-    paddingTop: 20,
-    backgroundColor: '#F5FCFF',
-  },
+
+    container: {
+      flex: 1,
+      flexDirection: 'row',
+
+      backgroundColor: '#fff',
+      marginBottom: 10,
+      marginTop: 15,
+    },
+    padding:{
+      flexDirection: 'column',
+      textAlign: 'left',
+      alignItems: 'flex-start',
+    },
+    rightContainer: {
+      flex: 1,
+    },
+    horizontalContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      marginLeft: 10,
+
+    },
+    textWrap: {
+      flexDirection: 'column',
+      flex: 0.8,
+      flexWrap: 'wrap'
+    },
+
+    link:{
+      color: 'blue',
+    },
+
+    title: {
+      fontSize: 30,
+      textAlign: 'center',
+      marginTop: 10,
+      marginLeft: 15,
+    },
+    year: {
+      textAlign: 'center',
+      marginTop: 2,
+      marginLeft: 15,
+    },
+    thumbnail: {
+      width: 600,
+      height: 200,
+    },
+    separator: {
+        height: 1,
+        backgroundColor: '#dddddd'
+    },
+    avatar: {
+      width: 75,
+      height: 75,
+      borderRadius: 37,
+      alignItems: 'center',
+
+    },
+
+    listView: {
+      paddingTop: 20,
+      backgroundColor: '#fff',
+      marginBottom: 70,
+    },
   });

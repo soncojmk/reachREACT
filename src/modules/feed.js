@@ -85,6 +85,18 @@ export default class Feed extends Component {
       .done();
   }
 
+  onUserPress (object_url, object_title) {
+    url = object_url.replace(".json", "/")
+    this.props.navigator.push({
+        screen: 'futuremoments.UserDetailsView', // unique ID registered with Navigation.registerScreen
+        title: object_title, // title of the screen as appears in the nav bar (optional)
+        navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+        navigatorButtons: {}, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
+        // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
+      passProps: {url: url}, // simple serializable object that will pass as props to all top screens (optional)
+      animationType: 'slide-down'
+    });
+  }
 
   saveEvent(event) {
     console.log('saveevent ' + event.url)
@@ -197,6 +209,7 @@ getPeopleSaving(user_url, event_url){
         <View style={styles.rightContainer}>
 
         <View style={styles.horizontalContainer}>
+          <TouchableOpacity onPress={() => this.onUserPress(event.account.url, event.author)}>
         <View>
         {event.account.avatar ?
         <Image
@@ -209,6 +222,8 @@ getPeopleSaving(user_url, event_url){
             <Text style={styles.year}>{event.account.user.username}</Text>
 
         </View>
+        </TouchableOpacity>
+
 
         <TouchableOpacity  onPress = {() => this.onObjectPress(event.url, event.title)}>
           <Text  style={styles.title}>{event.title}</Text>
